@@ -28,8 +28,7 @@ namespace SnakeCoOp.Snake
         {
             InputHandler();
             UpdateSnakePosition();
-            transform.position = new Vector2(gridPosition.x, gridPosition.y);
-            transform.eulerAngles = new Vector3(0, 0, GetDirectionAngle(moveDirection) - 90);
+            
         }
         #endregion ------------------
 
@@ -79,9 +78,13 @@ namespace SnakeCoOp.Snake
 
             if (movementTimer >= maxMoveTimer)
             {
-                gridPosition += moveDirection;
                 movementTimer -= maxMoveTimer;
+
+                gridPosition += moveDirection;
             }
+
+            transform.position = new Vector2(gridPosition.x, gridPosition.y);
+            transform.eulerAngles = new Vector3(0, 0, GetDirectionAngle(moveDirection) - 90);
         }
 
         private float GetDirectionAngle(Vector2Int direction)

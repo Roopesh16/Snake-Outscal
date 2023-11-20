@@ -11,22 +11,28 @@ namespace SnakeCoOp.Snake
         #endregion ------------------
 
         #region --------- Private Variables ---------
-        private float horizontalAxis;
-        private float verticalAxis;
+        private Vector2 axisValue;
+        private Rigidbody2D snakeRb;
         #endregion ------------------
 
         #region --------- Public Variables ---------
         #endregion ------------------
 
         #region --------- Monobehavior Methods ---------
-        void Start()
+        private void Start()
         {
-
+            snakeRb = GetComponent<Rigidbody2D>();
         }
 
-        void Update()
+        private void Update()
         {
+            axisValue.x = Input.GetAxisRaw("Horizontal");
+            axisValue.y = Input.GetAxisRaw("Vertical");
+        }
 
+        private void FixedUpdate()
+        {
+            snakeRb.MovePosition(snakeRb.position + axisValue * snakeSpeed * Time.fixedDeltaTime);
         }
         #endregion ------------------
 

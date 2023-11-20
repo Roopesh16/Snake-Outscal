@@ -97,6 +97,10 @@ namespace SnakeCoOp.Snake
         #endregion ------------------
 
         #region --------- Public Methods ---------
+        public Vector2Int GetSnakePosition()
+        {
+            return gridPosition;
+        }
         #endregion ------------------
     }
 }

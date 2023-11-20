@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SnakeCoOp.Snake
@@ -5,6 +6,7 @@ namespace SnakeCoOp.Snake
     public class SnakeController : MonoBehaviour
     {
         #region --------- Serialized Variables ---------
+        [SerializeField] private GameObject snakeBody;
         #endregion ------------------
 
         #region --------- Private Variables ---------
@@ -12,6 +14,8 @@ namespace SnakeCoOp.Snake
         private Vector2Int moveDirection;
         private float movementTimer = 0f;
         private const float maxMoveTimer = 0.75f;
+        private int snakeBodyCount = 1;
+        private List<Vector2Int> snakeBodyList;
         #endregion ------------------
 
         #region --------- Public Variables ---------
@@ -22,13 +26,15 @@ namespace SnakeCoOp.Snake
         {
             gridPosition = new Vector2Int(10, 10);
             moveDirection = new Vector2Int(0, 1);
+
+            snakeBodyList = new List<Vector2Int>() { gridPosition };
         }
 
         private void Update()
         {
             InputHandler();
             UpdateSnakePosition();
-            
+
         }
         #endregion ------------------
 
@@ -79,8 +85,21 @@ namespace SnakeCoOp.Snake
             if (movementTimer >= maxMoveTimer)
             {
                 movementTimer -= maxMoveTimer;
-
+                snakeBodyList.Insert(0, gridPosition);
                 gridPosition += moveDirection;
+
+                if (snakeBodyList.Count >= snakeBodyCount + 1)
+                {
+                    snakeBodyList.RemoveAt(snakeBodyList.Count - 1);
+                }
+
+                for (int i = 0; i < snakeBodyList.Count; i++)
+                {
+                    GameObject body = Instantiate(snakeBody);
+                    body.transform.SetParent(transform);
+                    body.transform.position = new Vector2(transform.position.x - (0.5f * snakeBodyCount),
+                                                          transform.position.y - (0.5f * snakeBodyCount));
+                }
             }
 
             transform.position = new Vector2(gridPosition.x, gridPosition.y);
@@ -90,7 +109,7 @@ namespace SnakeCoOp.Snake
         private float GetDirectionAngle(Vector2Int direction)
         {
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            if(angle<0)
+            if (angle < 0)
             {
                 angle += 360;
             }

@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Assertions.Comparers;
 
 namespace SnakeCoOp.Snake
 {
@@ -31,6 +29,7 @@ namespace SnakeCoOp.Snake
             InputHandler();
             UpdateSnakePosition();
             transform.position = new Vector2(gridPosition.x, gridPosition.y);
+            transform.eulerAngles = new Vector3(0, 0, GetDirectionAngle(moveDirection) - 90);
         }
         #endregion ------------------
 
@@ -83,6 +82,17 @@ namespace SnakeCoOp.Snake
                 gridPosition += moveDirection;
                 movementTimer -= maxMoveTimer;
             }
+        }
+
+        private float GetDirectionAngle(Vector2Int direction)
+        {
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            if(angle<0)
+            {
+                angle += 360;
+            }
+
+            return angle;
         }
         #endregion ------------------
 

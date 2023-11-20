@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace SnakeCoOp.Snake
@@ -13,7 +14,7 @@ namespace SnakeCoOp.Snake
         private Vector2Int gridPosition;
         private Vector2Int moveDirection;
         private float movementTimer = 0f;
-        private const float maxMoveTimer = 0.75f;
+        private const float maxMoveTimer = 0.3f;
         private int snakeBodyCount = 1;
         private List<Vector2Int> snakeBodyList;
         #endregion ------------------
@@ -27,7 +28,7 @@ namespace SnakeCoOp.Snake
             gridPosition = new Vector2Int(10, 10);
             moveDirection = new Vector2Int(0, 1);
 
-            snakeBodyList = new List<Vector2Int>() { gridPosition };
+            snakeBodyList = new List<Vector2Int>();
         }
 
         private void Update()
@@ -95,10 +96,12 @@ namespace SnakeCoOp.Snake
 
                 for (int i = 0; i < snakeBodyList.Count; i++)
                 {
+                    Vector2Int snakeMovePosition = snakeBodyList[i];
                     GameObject body = Instantiate(snakeBody);
                     body.transform.SetParent(transform);
-                    body.transform.position = new Vector2(transform.position.x - (0.5f * snakeBodyCount),
-                                                          transform.position.y - (0.5f * snakeBodyCount));
+                    body.transform.position = new Vector2(snakeMovePosition.x, transform.position.y);
+                    body.transform.eulerAngles = transform.eulerAngles;
+                    Destroy(body, maxMoveTimer);
                 }
             }
 

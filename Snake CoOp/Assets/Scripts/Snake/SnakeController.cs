@@ -21,18 +21,12 @@ namespace SnakeCoOp.Snake
         #region --------- Monobehavior Methods ---------
         private void Start()
         {
-            snakeRb = GetComponent<Rigidbody2D>();
+            
         }
 
         private void Update()
         {
-            axisValue.x = Input.GetAxisRaw("Horizontal");
-            axisValue.y = Input.GetAxisRaw("Vertical");
-        }
-
-        private void FixedUpdate()
-        {
-            snakeRb.MovePosition(snakeRb.position + axisValue * snakeSpeed * Time.fixedDeltaTime);
+            
         }
         #endregion ------------------
 

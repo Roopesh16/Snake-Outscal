@@ -47,6 +47,7 @@ namespace SnakeCoOp.Food
                     {
                         if (food.transform.position == snake.transform.position)
                         {
+                            foodTimer -= maxFoodTimer;
                             Destroy(food);
                             snake.IncreaseSnakeSize();
                             SpawnFood();

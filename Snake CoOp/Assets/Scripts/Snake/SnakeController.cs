@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using SnakeCoOp.Grid;
 using UnityEngine;
+using System.Linq;
 
 namespace SnakeCoOp.Snake
 {
@@ -148,7 +149,7 @@ namespace SnakeCoOp.Snake
 
         private void AddSnakeBody()
         {
-            for (int i = 0; i < snakeBodyList.Count; i++)
+            for (int i = 0; i < snakeBodyCount; i++)
             {
                 Vector2 bodyPosition = snakeBodyList[i];
                 GameObject body = Instantiate(snakeBody);
@@ -168,7 +169,24 @@ namespace SnakeCoOp.Snake
 
         public void IncreaseSnakeSize()
         {
-            snakeBodyCount++;
+            int randomPart = Random.Range(1, 4);
+            snakeBodyCount += randomPart;
+        }
+
+        public void DecreaseSnakeSize()
+        {
+            if (snakeBodyCount == 0)
+            {
+                return;
+            }
+
+            int randomPart = Random.Range(1, 4);
+            snakeBodyCount -= randomPart;
+
+            if (snakeBodyCount <= 0)
+            {
+                snakeBodyCount = 0;
+            }
         }
 
         public List<Vector2Int> GetFullSnakeSize()

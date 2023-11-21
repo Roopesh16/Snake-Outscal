@@ -7,11 +7,7 @@ namespace SnakeCoOp.Snake
 {
     public class SnakeController : MonoBehaviour
     {
-        private enum State
-        {
-            ALIVE,
-            DEAD
-        }
+        
 
         #region --------- Serialized Variables ---------
         [SerializeField] private GameObject snakeBody;
@@ -19,7 +15,6 @@ namespace SnakeCoOp.Snake
         #endregion ------------------
 
         #region --------- Private Variables ---------
-        private State state;
         private Vector2Int gridPosition;
         private Vector2Int moveDirection;
         private float movementTimer = 0f;
@@ -40,11 +35,12 @@ namespace SnakeCoOp.Snake
         {
             gridPosition = new Vector2Int(10, 10);
             moveDirection = new Vector2Int(0, 1);
+            GameManager.Instance.SetState(State.ALIVE);
         }
 
         private void Update()
         {
-            if (state == State.ALIVE)
+            if (GameManager.Instance.GetState() == State.ALIVE)
             {
                 InputHandler();
                 UpdateSnakePosition();
@@ -114,7 +110,6 @@ namespace SnakeCoOp.Snake
                 AddSnakeBody();
                 CheckGameOver();
             }
-
         }
 
         private void CheckGameOver()
@@ -123,7 +118,7 @@ namespace SnakeCoOp.Snake
             {
                 if (gridPosition == snakeBodyList[i])
                 {
-                    state = State.DEAD;
+                    GameManager.Instance.SetState(State.DEAD);
                     GameOver();
                     break;
                 }

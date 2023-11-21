@@ -13,9 +13,6 @@ namespace SnakeCoOp.Grid
         private int height;
         #endregion ------------------
 
-        #region --------- Serialized Variables ---------
-        #endregion ------------------
-
         #region --------- Monobehavior Methods ---------
         private void Awake()
         {

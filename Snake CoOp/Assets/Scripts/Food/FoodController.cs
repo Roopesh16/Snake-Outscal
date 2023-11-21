@@ -31,25 +31,32 @@ namespace SnakeCoOp.Food
 
         private void Update()
         {
-            foodTimer += Time.deltaTime;
-            if (food != null)
+            if (GameManager.Instance.GetState() == State.ALIVE)
             {
-                if (foodTimer >= maxFoodTimer)
+                foodTimer += Time.deltaTime;
+                if (food != null)
                 {
-                    foodTimer -= maxFoodTimer;
-                    Destroy(food);
-                    SpawnFood();
-
-                }
-                else
-                {
-                    if (food.transform.position == snake.transform.position)
+                    if (foodTimer >= maxFoodTimer)
                     {
+                        foodTimer -= maxFoodTimer;
                         Destroy(food);
-                        snake.IncreaseSnakeSize();
                         SpawnFood();
+
+                    }
+                    else
+                    {
+                        if (food.transform.position == snake.transform.position)
+                        {
+                            Destroy(food);
+                            snake.IncreaseSnakeSize();
+                            SpawnFood();
+                        }
                     }
                 }
+            }
+            else
+            {
+                Destroy(food);
             }
         }
         #endregion ------------------

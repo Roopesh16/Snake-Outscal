@@ -16,6 +16,8 @@ namespace SnakeCoOp.Food
         #region --------- Private Variables ---------
         private GameObject food;
         private Vector2Int foodPosition;
+        private float foodTimer = 0f;
+        private float maxFoodTimer = 5f;
         #endregion ------------------
 
         #region --------- Public Variables ---------
@@ -29,11 +31,25 @@ namespace SnakeCoOp.Food
 
         private void Update()
         {
-            if (food != null && food.transform.position == snake.transform.position)
+            foodTimer += Time.deltaTime;
+            if (food != null)
             {
-                Destroy(food);
-                snake.IncreaseSnakeSize();
-                SpawnFood();
+                if (foodTimer >= maxFoodTimer)
+                {
+                    foodTimer -= maxFoodTimer;
+                    Destroy(food);
+                    SpawnFood();
+
+                }
+                else
+                {
+                    if (food.transform.position == snake.transform.position)
+                    {
+                        Destroy(food);
+                        snake.IncreaseSnakeSize();
+                        SpawnFood();
+                    }
+                }
             }
         }
         #endregion ------------------

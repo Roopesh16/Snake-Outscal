@@ -155,65 +155,8 @@ Transform:
   - {fileID: 1112697101}
   - {fileID: 1455408712}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &471028338
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1585586371622559741, guid: 581dd450c584b5049802cfdb1097f54c, type: 3}
-      propertyPath: m_Name
-      value: Food
-      objectReference: {fileID: 0}
-    - target: {fileID: 1585586371622559743, guid: 581dd450c584b5049802cfdb1097f54c, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1585586371622559743, guid: 581dd450c584b5049802cfdb1097f54c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 12.041164
-      objectReference: {fileID: 0}
-    - target: {fileID: 1585586371622559743, guid: 581dd450c584b5049802cfdb1097f54c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5.2236323
-      objectReference: {fileID: 0}
-    - target: {fileID: 1585586371622559743, guid: 581dd450c584b5049802cfdb1097f54c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1585586371622559743, guid: 581dd450c584b5049802cfdb1097f54c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1585586371622559743, guid: 581dd450c584b5049802cfdb1097f54c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1585586371622559743, guid: 581dd450c584b5049802cfdb1097f54c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1585586371622559743, guid: 581dd450c584b5049802cfdb1097f54c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1585586371622559743, guid: 581dd450c584b5049802cfdb1097f54c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1585586371622559743, guid: 581dd450c584b5049802cfdb1097f54c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1585586371622559743, guid: 581dd450c584b5049802cfdb1097f54c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 581dd450c584b5049802cfdb1097f54c, type: 3}
 --- !u!1 &499366137
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,6 +204,7 @@ MonoBehaviour:
   gridController: {fileID: 1112697102}
   foodPrefab: {fileID: 1585586371622559741, guid: 581dd450c584b5049802cfdb1097f54c, type: 3}
   snake: {fileID: 4229612352645425875}
+  powerupController: {fileID: 1455408713}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,7 +371,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1112697100
 GameObject:
@@ -504,7 +448,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1144909307
 MonoBehaviour:
@@ -564,10 +508,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridController: {fileID: 1112697102}
   snake: {fileID: 4229612352645425875}
+  food: {fileID: 499366139}
   powerUpPrefabs:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 4400605843099557404, guid: 4a7ec14c136c5fd499cda39e41eddc47, type: 3}
+  - {fileID: 4573135202210861636, guid: 9673010933b84964a99b6fc45cbbc940, type: 3}
+  - {fileID: 9132975847713019948, guid: 5c7dca4df0afb8d4dab7e46a88440d40, type: 3}
 --- !u!212 &4229612352645425872
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -633,7 +578,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4229612352645425874
 GameObject:

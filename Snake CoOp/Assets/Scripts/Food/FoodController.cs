@@ -31,6 +31,7 @@ namespace SnakeCoOp.Food
             if(food != null && food.transform.position == snake.transform.position)
             {
                 Destroy(food);
+                snake.IncreaseSnakeSize();
                 SpawnFood();
             }    
         }
@@ -45,7 +46,7 @@ namespace SnakeCoOp.Food
             do
             {
                foodPosition = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
-            } while (snake.GetSnakePosition() == foodPosition);
+            } while (snake.GetFullSnakeSize().IndexOf(foodPosition) != -1);
 
             food = Instantiate(foodPrefab);
             food.transform.position = new Vector2(foodPosition.x, foodPosition.y);

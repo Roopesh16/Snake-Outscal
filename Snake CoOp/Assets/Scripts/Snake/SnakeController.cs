@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections;
 using SnakeCoOp.Grid;
 using UnityEngine;
 
@@ -6,11 +7,7 @@ namespace SnakeCoOp.Snake
 {
     public class SnakeController : MonoBehaviour
     {
-        private enum State
-        {
-            ALIVE,
-            DEAD
-        }
+
 
         #region --------- Serialized Variables ---------
         [SerializeField] private GameObject snakeBody;
@@ -18,13 +15,13 @@ namespace SnakeCoOp.Snake
         #endregion ------------------
 
         #region --------- Private Variables ---------
-        private State state;
         private Vector2Int gridPosition;
         private Vector2Int moveDirection;
         private float movementTimer = 0f;
-        private const float maxMoveTimer = 0.3f;
+        private float maxMoveTimer = 0.3f;
         private int snakeBodyCount = 0;
         private List<Vector2Int> snakeBodyList;
+        private bool hasShield = false;
         #endregion ------------------
 
         #region --------- Public Variables ---------
@@ -39,11 +36,12 @@ namespace SnakeCoOp.Snake
         {
             gridPosition = new Vector2Int(10, 10);
             moveDirection = new Vector2Int(0, 1);
+            GameManager.Instance.SetState(State.ALIVE);
         }
 
         private void Update()
         {
-            if (state == State.ALIVE)
+            if (GameManager.Instance.GetState() == State.ALIVE)
             {
                 InputHandler();
                 UpdateSnakePosition();
@@ -110,28 +108,26 @@ namespace SnakeCoOp.Snake
                 transform.position = new Vector2(gridPosition.x, gridPosition.y);
                 transform.eulerAngles = new Vector3(0, 0, GetDirectionAngle(moveDirection) - 90);
 
-                for (int i = 0; i < snakeBodyList.Count; i++)
-                {
-                    Vector2 bodyPosition = snakeBodyList[i];
-                    GameObject body = Instantiate(snakeBody);
-                    body.transform.SetParent(transform);
-                    body.transform.position = new Vector2(bodyPosition.x, bodyPosition.y);
-                    body.transform.eulerAngles = transform.eulerAngles;
-                    Destroy(body, maxMoveTimer);
-                }
+                AddSnakeBody();
 
-                for (int i = 0; i < snakeBodyList.Count;i++)
+                if (!hasShield)
                 {
-                    if(gridPosition == snakeBodyList[i])
-                    {
-                        state = State.DEAD;
-                        GameOver();
-                        break;
-                    }
+                    CheckGameOver();
                 }
-
             }
+        }
 
+        private void CheckGameOver()
+        {
+            for (int i = 0; i < snakeBodyList.Count; i++)
+            {
+                if (gridPosition == snakeBodyList[i])
+                {
+                    GameManager.Instance.SetState(State.DEAD);
+                    GameOver();
+                    break;
+                }
+            }
         }
 
         private float GetDirectionAngle(Vector2Int direction)
@@ -148,6 +144,19 @@ namespace SnakeCoOp.Snake
         private void GameOver()
         {
             print("Game Over");
+        }
+
+        private void AddSnakeBody()
+        {
+            for (int i = 0; i < snakeBodyList.Count; i++)
+            {
+                Vector2 bodyPosition = snakeBodyList[i];
+                GameObject body = Instantiate(snakeBody);
+                body.transform.SetParent(transform);
+                body.transform.position = new Vector2(bodyPosition.x, bodyPosition.y);
+                body.transform.eulerAngles = transform.eulerAngles;
+                Destroy(body, maxMoveTimer);
+            }
         }
         #endregion ------------------
 
@@ -167,6 +176,25 @@ namespace SnakeCoOp.Snake
             List<Vector2Int> snakeFullBodyList = new List<Vector2Int>() { gridPosition };
             snakeFullBodyList.AddRange(snakeBodyList);
             return snakeFullBodyList;
+        }
+
+        public IEnumerator ActivateShield()
+        {
+            // DisplayShieldText();
+            float maxTime = Random.Range(1, 4);
+            hasShield = true;
+            yield return new WaitForSeconds(maxTime);
+            hasShield = false;
+            yield return null;
+        }
+
+        public IEnumerator ActivateSpeedBoost()
+        {
+            float maxTime = Random.Range(1, 4);
+            maxMoveTimer = 0.1f;
+            yield return new WaitForSeconds(maxTime);
+            maxMoveTimer = 0.3f;
+            yield return null;
         }
         #endregion ------------------
     }

@@ -1,6 +1,8 @@
 using UnityEngine;
 using SnakeCoOp.Snake;
 using SnakeCoOp.Grid;
+using SnakeCoOp.Powerup;
+using SnakeCoOp.UI;
 
 namespace SnakeCoOp.Food
 {
@@ -11,11 +13,15 @@ namespace SnakeCoOp.Food
         [SerializeField] private GridController gridController;
         [SerializeField] private GameObject foodPrefab;
         [SerializeField] private SnakeController snake;
+        [SerializeField] private PowerupController powerupController;
+        [SerializeField] private GameUI gameUI;
         #endregion ------------------
 
         #region --------- Private Variables ---------
         private GameObject food;
         private Vector2Int foodPosition;
+        private float foodTimer = 0f;
+        private float maxFoodTimer = 5f;
         #endregion ------------------
 
         #region --------- Public Variables ---------
@@ -29,20 +35,48 @@ namespace SnakeCoOp.Food
 
         private void Update()
         {
-            if (food != null && food.transform.position == snake.transform.position)
+            if (GameManager.Instance.GetState() == State.ALIVE)
+            {
+                foodTimer += Time.deltaTime;
+                if (food != null)
+                {
+                    if (foodTimer >= maxFoodTimer)
+                    {
+                        foodTimer -= maxFoodTimer;
+                        Destroy(food);
+                        SpawnFood();
+                        powerupController.SpawnPowerup();
+                    }
+                    else
+                    {
+                        if (food.transform.position == snake.transform.position)
+                        {
+                            foodTimer -= maxFoodTimer;
+                            snake.IncreaseSnakeSize();
+                            gameUI.UpdateScore();
+                            Destroy(food);
+                            SpawnFood();
+                            powerupController.SpawnPowerup();
+                        }
+                    }
+                }
+            }
+            else
             {
                 Destroy(food);
-                snake.IncreaseSnakeSize();
-                SpawnFood();
             }
         }
         #endregion ------------------
 
         #region --------- Public Methods ---------
+        public Vector2Int GetFoodPosition()
+        {
+            return foodPosition;
+        }
         #endregion ------------------
 
         #region --------- Private Methods ---------
-        public void SpawnFood()
+        private void SpawnFood()
         {
             do
             {

@@ -7,6 +7,13 @@ namespace SnakeCoOp.Powerup
 {
     public class PowerupController : MonoBehaviour
     {
+        private enum PowerupType
+        {
+            SHIELD,
+            SPEED_BOOST,
+            SCORE_DOUBLE
+        }
+
         #region --------- Serialized Variables ---------
         [SerializeField] private GridController gridController;
         [SerializeField] private SnakeController snake;
@@ -20,6 +27,7 @@ namespace SnakeCoOp.Powerup
         private int powerupIndex = 0;
         private float powerupTimer = 0f;
         private float maxPowerupTimer = 5f;
+        private PowerupType powerupType;
         #endregion ------------------
 
         #region --------- Public Variables ---------
@@ -33,7 +41,6 @@ namespace SnakeCoOp.Powerup
                 powerupTimer += Time.deltaTime;
                 if (powerUp != null)
                 {
-                    print(powerupTimer);
                     if (powerupTimer >= maxPowerupTimer)
                     {
                         powerupTimer -= maxPowerupTimer;
@@ -45,6 +52,17 @@ namespace SnakeCoOp.Powerup
                         {
                             powerupTimer -= maxPowerupTimer;
                             Destroy(powerUp);
+                            switch(powerupType)
+                            {
+                                case PowerupType.SHIELD: print("Shield");
+                                    StartCoroutine(snake.ActivateShield());
+                                    break;
+                                case PowerupType.SPEED_BOOST: print("Speed");
+                                StartCoroutine(snake.ActivateSpeedBoost());
+                                    break;
+                                // case PowerupType.SCORE_DOUBLE:DoubleScore();
+                                //     break;
+                            }
                         }
                     }
                 }
@@ -83,9 +101,19 @@ namespace SnakeCoOp.Powerup
         {
             int randVal = Random.Range(0, 100);
 
-            if (randVal <= 20)
+            if (randVal <= 100)
             {
-                powerupIndex = Random.Range(0, 3);
+                // powerupIndex = Random.Range(0, 3);
+                powerupIndex = 1;
+                switch(powerupIndex)
+                {
+                    case 0:powerupType = PowerupType.SHIELD;
+                        break;
+                    case 1:powerupType = PowerupType.SPEED_BOOST;
+                        break;
+                    case 2:powerupType = PowerupType.SCORE_DOUBLE;
+                        break;
+                }
                 return powerUpPrefabs[powerupIndex];
             }
 

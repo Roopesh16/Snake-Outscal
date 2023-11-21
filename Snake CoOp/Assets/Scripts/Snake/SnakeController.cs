@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Collections;
 using SnakeCoOp.Grid;
 using UnityEngine;
 
@@ -7,7 +7,7 @@ namespace SnakeCoOp.Snake
 {
     public class SnakeController : MonoBehaviour
     {
-        
+
 
         #region --------- Serialized Variables ---------
         [SerializeField] private GameObject snakeBody;
@@ -18,9 +18,10 @@ namespace SnakeCoOp.Snake
         private Vector2Int gridPosition;
         private Vector2Int moveDirection;
         private float movementTimer = 0f;
-        private const float maxMoveTimer = 0.3f;
+        private float maxMoveTimer = 0.3f;
         private int snakeBodyCount = 0;
         private List<Vector2Int> snakeBodyList;
+        private bool hasShield = false;
         #endregion ------------------
 
         #region --------- Public Variables ---------
@@ -108,7 +109,11 @@ namespace SnakeCoOp.Snake
                 transform.eulerAngles = new Vector3(0, 0, GetDirectionAngle(moveDirection) - 90);
 
                 AddSnakeBody();
-                CheckGameOver();
+
+                if (!hasShield)
+                {
+                    CheckGameOver();
+                }
             }
         }
 
@@ -171,6 +176,25 @@ namespace SnakeCoOp.Snake
             List<Vector2Int> snakeFullBodyList = new List<Vector2Int>() { gridPosition };
             snakeFullBodyList.AddRange(snakeBodyList);
             return snakeFullBodyList;
+        }
+
+        public IEnumerator ActivateShield()
+        {
+            // DisplayShieldText();
+            float maxTime = Random.Range(1, 4);
+            hasShield = true;
+            yield return new WaitForSeconds(maxTime);
+            hasShield = false;
+            yield return null;
+        }
+
+        public IEnumerator ActivateSpeedBoost()
+        {
+            float maxTime = Random.Range(1, 4);
+            maxMoveTimer = 0.1f;
+            yield return new WaitForSeconds(maxTime);
+            maxMoveTimer = 0.3f;
+            yield return null;
         }
         #endregion ------------------
     }

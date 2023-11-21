@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using SnakeCoOp.Grid;
 using UnityEngine;
@@ -110,28 +111,23 @@ namespace SnakeCoOp.Snake
                 transform.position = new Vector2(gridPosition.x, gridPosition.y);
                 transform.eulerAngles = new Vector3(0, 0, GetDirectionAngle(moveDirection) - 90);
 
-                for (int i = 0; i < snakeBodyList.Count; i++)
-                {
-                    Vector2 bodyPosition = snakeBodyList[i];
-                    GameObject body = Instantiate(snakeBody);
-                    body.transform.SetParent(transform);
-                    body.transform.position = new Vector2(bodyPosition.x, bodyPosition.y);
-                    body.transform.eulerAngles = transform.eulerAngles;
-                    Destroy(body, maxMoveTimer);
-                }
-
-                for (int i = 0; i < snakeBodyList.Count;i++)
-                {
-                    if(gridPosition == snakeBodyList[i])
-                    {
-                        state = State.DEAD;
-                        GameOver();
-                        break;
-                    }
-                }
-
+                AddSnakeBody();
+                CheckGameOver();
             }
 
+        }
+
+        private void CheckGameOver()
+        {
+            for (int i = 0; i < snakeBodyList.Count; i++)
+            {
+                if (gridPosition == snakeBodyList[i])
+                {
+                    state = State.DEAD;
+                    GameOver();
+                    break;
+                }
+            }
         }
 
         private float GetDirectionAngle(Vector2Int direction)
@@ -148,6 +144,19 @@ namespace SnakeCoOp.Snake
         private void GameOver()
         {
             print("Game Over");
+        }
+
+        private void AddSnakeBody()
+        {
+            for (int i = 0; i < snakeBodyList.Count; i++)
+            {
+                Vector2 bodyPosition = snakeBodyList[i];
+                GameObject body = Instantiate(snakeBody);
+                body.transform.SetParent(transform);
+                body.transform.position = new Vector2(bodyPosition.x, bodyPosition.y);
+                body.transform.eulerAngles = transform.eulerAngles;
+                Destroy(body, maxMoveTimer);
+            }
         }
         #endregion ------------------
 

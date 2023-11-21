@@ -2,6 +2,7 @@ using UnityEngine;
 using SnakeCoOp.Grid;
 using SnakeCoOp.Snake;
 using SnakeCoOp.Food;
+using SnakeCoOp.UI;
 
 namespace SnakeCoOp.Powerup
 {
@@ -18,6 +19,7 @@ namespace SnakeCoOp.Powerup
         [SerializeField] private GridController gridController;
         [SerializeField] private SnakeController snake;
         [SerializeField] private FoodController food;
+        [SerializeField] private GameUI gameUI;
         [SerializeField] private GameObject[] powerUpPrefabs;
         #endregion ------------------
 
@@ -52,16 +54,18 @@ namespace SnakeCoOp.Powerup
                         {
                             powerupTimer -= maxPowerupTimer;
                             Destroy(powerUp);
-                            switch(powerupType)
+                            switch (powerupType)
                             {
-                                case PowerupType.SHIELD: print("Shield");
+                                case PowerupType.SHIELD:
                                     StartCoroutine(snake.ActivateShield());
                                     break;
-                                case PowerupType.SPEED_BOOST: print("Speed");
-                                StartCoroutine(snake.ActivateSpeedBoost());
+                                case PowerupType.SPEED_BOOST:
+                                    StartCoroutine(snake.ActivateSpeedBoost());
                                     break;
-                                // case PowerupType.SCORE_DOUBLE:DoubleScore();
-                                //     break;
+                                case PowerupType.SCORE_DOUBLE:
+                                    print("score");
+                                    StartCoroutine(gameUI.ActivateDoubleScore());
+                                    break;
                             }
                         }
                     }
@@ -104,14 +108,17 @@ namespace SnakeCoOp.Powerup
             if (randVal <= 100)
             {
                 // powerupIndex = Random.Range(0, 3);
-                powerupIndex = 1;
-                switch(powerupIndex)
+                powerupIndex = 2;
+                switch (powerupIndex)
                 {
-                    case 0:powerupType = PowerupType.SHIELD;
+                    case 0:
+                        powerupType = PowerupType.SHIELD;
                         break;
-                    case 1:powerupType = PowerupType.SPEED_BOOST;
+                    case 1:
+                        powerupType = PowerupType.SPEED_BOOST;
                         break;
-                    case 2:powerupType = PowerupType.SCORE_DOUBLE;
+                    case 2:
+                        powerupType = PowerupType.SCORE_DOUBLE;
                         break;
                 }
                 return powerUpPrefabs[powerupIndex];

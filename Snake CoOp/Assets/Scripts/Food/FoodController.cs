@@ -2,6 +2,7 @@ using UnityEngine;
 using SnakeCoOp.Snake;
 using SnakeCoOp.Grid;
 using SnakeCoOp.Powerup;
+using SnakeCoOp.UI;
 
 namespace SnakeCoOp.Food
 {
@@ -13,6 +14,7 @@ namespace SnakeCoOp.Food
         [SerializeField] private GameObject foodPrefab;
         [SerializeField] private SnakeController snake;
         [SerializeField] private PowerupController powerupController;
+        [SerializeField] private GameUI gameUI;
         #endregion ------------------
 
         #region --------- Private Variables ---------
@@ -51,13 +53,12 @@ namespace SnakeCoOp.Food
                         {
                             foodTimer -= maxFoodTimer;
                             snake.IncreaseSnakeSize();
+                            gameUI.UpdateScore();
                             Destroy(food);
                             SpawnFood();
                             powerupController.SpawnPowerup();
                         }
                     }
-
-
                 }
             }
             else

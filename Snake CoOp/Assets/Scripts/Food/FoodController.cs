@@ -9,9 +9,15 @@ namespace SnakeCoOp.Food
 
     public class FoodController : MonoBehaviour
     {
+        private enum FoodType
+        {
+            MASS_GAINER,
+            MASS_BURNER
+        }
+
         #region --------- Serialized Variables ---------
         [SerializeField] private GridController gridController;
-        [SerializeField] private GameObject foodPrefab;
+        [SerializeField] private GameObject[] foodPrefabs;
         [SerializeField] private SnakeController snake;
         [SerializeField] private PowerupController powerupController;
         [SerializeField] private GameUI gameUI;
@@ -22,6 +28,8 @@ namespace SnakeCoOp.Food
         private Vector2Int foodPosition;
         private float foodTimer = 0f;
         private float maxFoodTimer = 5f;
+        private int foodIndex;
+        private FoodType foodType;
         #endregion ------------------
 
         #region --------- Public Variables ---------
@@ -52,7 +60,14 @@ namespace SnakeCoOp.Food
                         if (food.transform.position == snake.transform.position)
                         {
                             foodTimer -= maxFoodTimer;
-                            snake.IncreaseSnakeSize();
+                            if (foodType == FoodType.MASS_GAINER)
+                            {
+                                snake.IncreaseSnakeSize();
+                            }
+                            else
+                            {
+                                snake.DecreaseSnakeSize();
+                            }
                             gameUI.UpdateScore();
                             Destroy(food);
                             SpawnFood();
@@ -78,12 +93,23 @@ namespace SnakeCoOp.Food
         #region --------- Private Methods ---------
         private void SpawnFood()
         {
+            foodIndex = Random.Range(0, 2);
+
+            if (foodIndex == 0)
+            {
+                foodType = FoodType.MASS_GAINER;
+            }
+            else
+            {
+                foodType = FoodType.MASS_BURNER;
+            }
+
             do
             {
                 foodPosition = new Vector2Int(Random.Range(0, gridController.GetGridWidth()), Random.Range(0, gridController.GetGridHeight()));
             } while (snake.GetFullSnakeSize().IndexOf(foodPosition) != -1);
 
-            food = Instantiate(foodPrefab);
+            food = Instantiate(foodPrefabs[foodIndex]);
             food.transform.position = new Vector2(foodPosition.x, foodPosition.y);
         }
         #endregion ------------------

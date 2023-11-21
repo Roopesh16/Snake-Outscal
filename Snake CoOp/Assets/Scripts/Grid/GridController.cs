@@ -49,6 +49,16 @@ namespace SnakeCoOp.Grid
 
             return gridPosition;
         }
+
+        public int GetGridWidth()
+        {
+            return width;
+        }
+
+        public int GetGridHeight()
+        {
+            return height;
+        }
         #endregion ------------------
     }
 }

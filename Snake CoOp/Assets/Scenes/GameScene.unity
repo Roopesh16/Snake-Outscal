@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de999b05e4f213a4eb20d291e56d0c78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridController: {fileID: 1112697102}
   foodPrefab: {fileID: 1585586371622559741, guid: 581dd450c584b5049802cfdb1097f54c, type: 3}
   snake: {fileID: 4229612352645425875}
 --- !u!1 &519420028

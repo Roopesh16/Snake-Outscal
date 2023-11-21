@@ -1,5 +1,6 @@
 using UnityEngine;
 using SnakeCoOp.Snake;
+using SnakeCoOp.Grid;
 
 namespace SnakeCoOp.Food
 {
@@ -7,6 +8,7 @@ namespace SnakeCoOp.Food
     public class FoodController : MonoBehaviour
     {
         #region --------- Serialized Variables ---------
+        [SerializeField] private GridController gridController;
         [SerializeField] private GameObject foodPrefab;
         [SerializeField] private SnakeController snake;
         #endregion ------------------
@@ -14,8 +16,6 @@ namespace SnakeCoOp.Food
         #region --------- Private Variables ---------
         private GameObject food;
         private Vector2Int foodPosition;
-        private const int width = 20;
-        private const int height = 20;
         #endregion ------------------
 
         #region --------- Public Variables ---------
@@ -27,13 +27,14 @@ namespace SnakeCoOp.Food
             SpawnFood();
         }
 
-        private void Update() {
-            if(food != null && food.transform.position == snake.transform.position)
+        private void Update()
+        {
+            if (food != null && food.transform.position == snake.transform.position)
             {
                 Destroy(food);
                 snake.IncreaseSnakeSize();
                 SpawnFood();
-            }    
+            }
         }
         #endregion ------------------
 
@@ -45,7 +46,7 @@ namespace SnakeCoOp.Food
         {
             do
             {
-               foodPosition = new Vector2Int(Random.Range(0, width), Random.Range(0, height));
+                foodPosition = new Vector2Int(Random.Range(0, gridController.GetGridWidth()), Random.Range(0, gridController.GetGridHeight()));
             } while (snake.GetFullSnakeSize().IndexOf(foodPosition) != -1);
 
             food = Instantiate(foodPrefab);

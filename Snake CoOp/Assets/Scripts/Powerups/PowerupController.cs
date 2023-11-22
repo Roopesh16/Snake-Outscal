@@ -107,8 +107,7 @@ namespace SnakeCoOp.Powerup
 
             if (randVal <= 100)
             {
-                // powerupIndex = Random.Range(0, 3);
-                powerupIndex = 2;
+                powerupIndex = Random.Range(0, 3);
                 switch (powerupIndex)
                 {
                     case 0:

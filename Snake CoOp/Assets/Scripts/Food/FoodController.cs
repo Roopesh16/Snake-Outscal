@@ -93,14 +93,16 @@ namespace SnakeCoOp.Food
         #region --------- Private Methods ---------
         private void SpawnFood()
         {
-            foodIndex = Random.Range(0, 2);
+            int randVal = Random.Range(0, 100);
 
-            if (foodIndex == 0)
+            if (randVal <= 70)
             {
+                foodIndex = 0;
                 foodType = FoodType.MASS_GAINER;
             }
             else
             {
+                foodIndex = 1;
                 foodType = FoodType.MASS_BURNER;
             }
 

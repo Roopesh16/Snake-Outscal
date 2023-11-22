@@ -48,14 +48,21 @@ namespace SnakeCoOp.Snake
         {
             if (GameManager.Instance.GetState() == State.ALIVE)
             {
-                InputHandler();
+                if (playerType == PlayerType.PLAYER_1)
+                {
+                    ArrowInputHandler();
+                }
+                else
+                {
+                    WASDInputHandler();
+                }
                 UpdateSnakePosition();
             }
         }
         #endregion ------------------
 
         #region --------- Private Methods ---------
-        private void InputHandler()
+        private void ArrowInputHandler()
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -85,6 +92,45 @@ namespace SnakeCoOp.Snake
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                if (moveDirection.x != -1)
+                {
+                    moveDirection.x = 1;
+                    moveDirection.y = 0;
+                }
+            }
+        }
+
+        private void WASDInputHandler()
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                if (moveDirection.y != -1)
+                {
+                    moveDirection.x = 0;
+                    moveDirection.y = 1;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                if (moveDirection.y != 1)
+                {
+                    moveDirection.x = 0;
+                    moveDirection.y = -1;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                if (moveDirection.x != 1)
+                {
+                    moveDirection.x = -1;
+                    moveDirection.y = 0;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.D))
             {
                 if (moveDirection.x != -1)
                 {
@@ -167,17 +213,15 @@ namespace SnakeCoOp.Snake
 
         private void SetPositionDirection()
         {
-            switch (playerType)
+            if (playerType == PlayerType.PLAYER_1)
             {
-                case PlayerType.PLAYER_1:
-                    gridPosition = new Vector2Int(0, 10);
-                    moveDirection = new Vector2Int(1, 0);
-                    break;
-                case PlayerType.PLAYER_2:
-                    gridPosition = new Vector2Int(gridController.GetGridWidth() - 1, 10);
-                    moveDirection = new Vector2Int(-1, 0);
-                    break;
-
+                gridPosition = new Vector2Int(0, 10);
+                moveDirection = new Vector2Int(1, 0);
+            }
+            else
+            {
+                gridPosition = new Vector2Int(gridController.GetGridWidth() - 1, 10);
+                moveDirection = new Vector2Int(-1, 0);
             }
         }
         #endregion ------------------

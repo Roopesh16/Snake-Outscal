@@ -277,10 +277,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d051d5e052e3f6a478f51c4391285127, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridController: {fileID: 0}
+  gridController: {fileID: 1112697102}
   foodPrefabs: []
   snake: {fileID: 0}
-  gameUI: {fileID: 0}
+  gameUICoOp: {fileID: 1574157568}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,7 +473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerType: 1
-  gameUI: {fileID: 0}
+  gameUICoOp: {fileID: 1574157568}
   snakeBody: {fileID: 8856185894149967750, guid: 98e9ca90d50dea84ea003e8f858607ef, type: 3}
   gridController: {fileID: 1112697102}
 --- !u!1 &1072729661
@@ -1549,7 +1549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerType: 0
-  gameUI: {fileID: 0}
+  gameUICoOp: {fileID: 1574157568}
   snakeBody: {fileID: 3647489463875334544, guid: e3752a79c13ebad478671ad151ca4a86, type: 3}
   gridController: {fileID: 1112697102}
 --- !u!1001 &5061825678408622489

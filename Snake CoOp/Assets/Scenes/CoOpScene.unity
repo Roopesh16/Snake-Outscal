@@ -278,8 +278,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridController: {fileID: 1112697102}
-  foodPrefabs: []
-  snake: {fileID: 0}
+  foodPrefabs:
+  - {fileID: 1585586371622559741, guid: 581dd450c584b5049802cfdb1097f54c, type: 3}
+  - {fileID: 8862264116279906217, guid: 51e0ca0cf4d20e745bc8669bd9890f85, type: 3}
+  snakeP1: {fileID: 4229612352645425875}
+  snakeP2: {fileID: 893408115}
   gameUICoOp: {fileID: 1574157568}
 --- !u!1 &519420028
 GameObject:

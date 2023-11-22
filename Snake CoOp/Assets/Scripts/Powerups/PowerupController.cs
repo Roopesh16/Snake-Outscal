@@ -4,16 +4,16 @@ using SnakeCoOp.Snake;
 using SnakeCoOp.Food;
 using SnakeCoOp.UI;
 
+public enum PowerupType
+{
+    SHIELD,
+    SPEED_BOOST,
+    SCORE_DOUBLE
+}
 namespace SnakeCoOp.Powerup
 {
     public class PowerupController : MonoBehaviour
     {
-        private enum PowerupType
-        {
-            SHIELD,
-            SPEED_BOOST,
-            SCORE_DOUBLE
-        }
 
         #region --------- Serialized Variables ---------
         [SerializeField] private GridController gridController;
@@ -63,7 +63,6 @@ namespace SnakeCoOp.Powerup
                                     StartCoroutine(snake.ActivateSpeedBoost());
                                     break;
                                 case PowerupType.SCORE_DOUBLE:
-                                    print("score");
                                     StartCoroutine(gameUI.ActivateDoubleScore());
                                     break;
                             }
@@ -105,7 +104,7 @@ namespace SnakeCoOp.Powerup
         {
             int randVal = Random.Range(0, 100);
 
-            if (randVal <= 100)
+            if (randVal <= 30)
             {
                 powerupIndex = Random.Range(0, 3);
                 switch (powerupIndex)

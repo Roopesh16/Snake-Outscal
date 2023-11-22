@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using SnakeCoOp.Grid;
 using UnityEngine;
-using System.Linq;
+using SnakeCoOp.UI;
 
 namespace SnakeCoOp.Snake
 {
@@ -11,6 +11,7 @@ namespace SnakeCoOp.Snake
 
 
         #region --------- Serialized Variables ---------
+        [SerializeField] private GameUI gameUI;
         [SerializeField] private GameObject snakeBody;
         [SerializeField] private GridController gridController;
         #endregion ------------------
@@ -198,8 +199,8 @@ namespace SnakeCoOp.Snake
 
         public IEnumerator ActivateShield()
         {
-            // DisplayShieldText();
             float maxTime = Random.Range(1, 4);
+            StartCoroutine(gameUI.DisplayPowerupText(PowerupType.SHIELD, maxTime));
             hasShield = true;
             yield return new WaitForSeconds(maxTime);
             hasShield = false;
@@ -209,6 +210,7 @@ namespace SnakeCoOp.Snake
         public IEnumerator ActivateSpeedBoost()
         {
             float maxTime = Random.Range(1, 4);
+            StartCoroutine(gameUI.DisplayPowerupText(PowerupType.SPEED_BOOST, maxTime));
             maxMoveTimer = 0.1f;
             yield return new WaitForSeconds(maxTime);
             maxMoveTimer = 0.3f;

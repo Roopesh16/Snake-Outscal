@@ -8,6 +8,7 @@ namespace SnakeCoOp.UI
     {
         #region --------- Serialized Variables ---------
         [SerializeField] private TextMeshProUGUI scoreText;
+        [SerializeField] private TextMeshProUGUI powerupText;
         #endregion ------------------
 
         #region --------- Public Variables ---------
@@ -17,6 +18,10 @@ namespace SnakeCoOp.UI
         private int foodScore = 10;
         #endregion ------------------
         #region --------- Monobehavior Methods ---------
+        private void Awake()
+        {
+            powerupText.enabled = false;
+        }
         #endregion ------------------
         #region --------- Public Methods ---------
         public void UpdateScore()
@@ -28,11 +33,30 @@ namespace SnakeCoOp.UI
         public IEnumerator ActivateDoubleScore()
         {
             int maxTime = Random.Range(1, 4);
+            StartCoroutine(DisplayPowerupText(PowerupType.SCORE_DOUBLE, maxTime));
             foodScore = 20;
-            print(foodScore);
             yield return new WaitForSeconds(maxTime);
             foodScore = 10;
-            print(foodScore);
+            yield return null;
+        }
+
+        public IEnumerator DisplayPowerupText(PowerupType powerupType, float time)
+        {
+            powerupText.enabled = true;
+            switch (powerupType)
+            {
+                case PowerupType.SHIELD:
+                    powerupText.text = "Shield Activated";
+                    break;
+                case PowerupType.SPEED_BOOST:
+                    powerupText.text = "Speed Boost Activated";
+                    break;
+                case PowerupType.SCORE_DOUBLE:
+                    powerupText.text = "Score Double Activated";
+                    break;
+            }
+            yield return new WaitForSeconds(time);
+            powerupText.enabled = false;
             yield return null;
         }
         #endregion ------------------

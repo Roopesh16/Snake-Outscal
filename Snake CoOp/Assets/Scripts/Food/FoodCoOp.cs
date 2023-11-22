@@ -1,13 +1,12 @@
 using UnityEngine;
 using SnakeCoOp.Snake;
 using SnakeCoOp.Grid;
-using SnakeCoOp.Powerup;
 using SnakeCoOp.UI;
 
 namespace SnakeCoOp.Food
 {
 
-    public class FoodController : MonoBehaviour
+    public class FoodCoOp : MonoBehaviour
     {
         private enum FoodType
         {
@@ -18,9 +17,9 @@ namespace SnakeCoOp.Food
         #region --------- Serialized Variables ---------
         [SerializeField] private GridController gridController;
         [SerializeField] private GameObject[] foodPrefabs;
-        [SerializeField] private SnakeController snake;
-        [SerializeField] private PowerupController powerupController;
-        [SerializeField] private GameUI gameUI;
+        [SerializeField] private SnakeCoOpController snakeP1;
+        [SerializeField] private SnakeCoOpController snakeP2;
+        [SerializeField] private GameUICoOp gameUICoOp;
         #endregion ------------------
 
         #region --------- Private Variables ---------
@@ -56,22 +55,37 @@ namespace SnakeCoOp.Food
                     }
                     else
                     {
-                        if (food.transform.position == snake.transform.position)
+                        if (food.transform.position == snakeP1.transform.position)
                         {
                             foodTimer -= maxFoodTimer;
                             if (foodType == FoodType.MASS_GAINER)
                             {
-                                snake.IncreaseSnakeSize();
-                                gameUI.IncreaseScore();
+                                snakeP1.IncreaseSnakeSize();
+                                gameUICoOp.IncreaseScore();
                             }
                             else
                             {
-                                snake.DecreaseSnakeSize();
-                                gameUI.DecreaseScore();
+                                snakeP1.DecreaseSnakeSize();
+                                gameUICoOp.DecreaseScore();
                             }
                             Destroy(food);
                             SpawnFood();
-                            powerupController.SpawnPowerup();
+                        }
+                        else if (food.transform.position == snakeP2.transform.position)
+                        {
+                            foodTimer -= maxFoodTimer;
+                            if (foodType == FoodType.MASS_GAINER)
+                            {
+                                snakeP2.IncreaseSnakeSize();
+                                gameUICoOp.IncreaseScore();
+                            }
+                            else
+                            {
+                                snakeP2.DecreaseSnakeSize();
+                                gameUICoOp.DecreaseScore();
+                            }
+                            Destroy(food);
+                            SpawnFood();
                         }
                     }
                 }
@@ -109,7 +123,7 @@ namespace SnakeCoOp.Food
             do
             {
                 foodPosition = new Vector2Int(Random.Range(0, gridController.GetGridWidth()), Random.Range(0, gridController.GetGridHeight()));
-            } while (snake.GetFullSnakeSize().IndexOf(foodPosition) != -1);
+            } while ((snakeP1.GetFullSnakeSize().IndexOf(foodPosition) != -1) && (snakeP2.GetFullSnakeSize().IndexOf(foodPosition) != -1));
 
             food = Instantiate(foodPrefabs[foodIndex]);
             food.transform.position = new Vector2(foodPosition.x, foodPosition.y);

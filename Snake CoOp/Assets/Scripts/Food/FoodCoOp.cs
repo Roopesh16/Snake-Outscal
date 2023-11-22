@@ -71,6 +71,22 @@ namespace SnakeCoOp.Food
                             Destroy(food);
                             SpawnFood();
                         }
+                        else if (food.transform.position == snakeP2.transform.position)
+                        {
+                            foodTimer -= maxFoodTimer;
+                            if (foodType == FoodType.MASS_GAINER)
+                            {
+                                snakeP2.IncreaseSnakeSize();
+                                gameUICoOp.IncreaseScore();
+                            }
+                            else
+                            {
+                                snakeP2.DecreaseSnakeSize();
+                                gameUICoOp.DecreaseScore();
+                            }
+                            Destroy(food);
+                            SpawnFood();
+                        }
                     }
                 }
             }

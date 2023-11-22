@@ -53,7 +53,7 @@ namespace SnakeCoOp.Food
                         foodTimer -= maxFoodTimer;
                         Destroy(food);
                         SpawnFood();
-                        powerupController.SpawnPowerup();
+                        // powerupController.SpawnPowerup();
                     }
                     else
                     {
@@ -63,12 +63,13 @@ namespace SnakeCoOp.Food
                             if (foodType == FoodType.MASS_GAINER)
                             {
                                 snake.IncreaseSnakeSize();
+                                gameUI.IncreaseScore();
                             }
                             else
                             {
                                 snake.DecreaseSnakeSize();
+                                gameUI.DecreaseScore();
                             }
-                            gameUI.UpdateScore();
                             Destroy(food);
                             SpawnFood();
                             powerupController.SpawnPowerup();

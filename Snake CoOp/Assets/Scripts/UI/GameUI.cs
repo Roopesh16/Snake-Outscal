@@ -24,9 +24,17 @@ namespace SnakeCoOp.UI
         }
         #endregion ------------------
         #region --------- Public Methods ---------
-        public void UpdateScore()
+        public void IncreaseScore()
         {
             score += foodScore;
+            DisplayText();
+        }
+
+        public void DecreaseScore()
+        {
+            score -= foodScore;
+            if (score <= 0)
+                score = 0;
             DisplayText();
         }
 

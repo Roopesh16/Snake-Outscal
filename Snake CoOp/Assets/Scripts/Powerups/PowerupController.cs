@@ -26,7 +26,7 @@ namespace SnakeCoOp.Powerup
         #region --------- Private Variables ---------
         private GameObject powerUp = null;
         private Vector2Int powerUpPosition;
-        private int powerupIndex = 0;
+        private int powerupIndex = -1;
         private float powerupTimer = 0f;
         private float maxPowerupTimer = 5f;
         private PowerupType powerupType;
@@ -104,7 +104,7 @@ namespace SnakeCoOp.Powerup
         {
             int randVal = Random.Range(0, 100);
 
-            if (randVal <= 30)
+            if (randVal <= 20)
             {
                 powerupIndex = Random.Range(0, 3);
                 switch (powerupIndex)
@@ -122,6 +122,7 @@ namespace SnakeCoOp.Powerup
                 return powerUpPrefabs[powerupIndex];
             }
 
+            powerupIndex = -1;
             return null;
         }
         #endregion ------------------

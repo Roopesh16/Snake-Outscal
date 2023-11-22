@@ -3,14 +3,20 @@ using System.Collections;
 using SnakeCoOp.Grid;
 using UnityEngine;
 using SnakeCoOp.UI;
+using UnityEngine.EventSystems;
 
 namespace SnakeCoOp.Snake
 {
     public class SnakeCoOp : MonoBehaviour
     {
-
+        private enum PlayerType
+        {
+            PLAYER_1,
+            PLAYER_2
+        }
 
         #region --------- Serialized Variables ---------
+        [SerializeField] private PlayerType playerType;
         [SerializeField] private GameUI gameUI;
         [SerializeField] private GameObject snakeBody;
         [SerializeField] private GridController gridController;
@@ -32,12 +38,12 @@ namespace SnakeCoOp.Snake
         #region --------- Monobehavior Methods ---------
         private void Awake()
         {
+            SetInput();
             snakeBodyList = new List<Vector2Int>();
         }
         private void Start()
         {
-            gridPosition = new Vector2Int(10, 10);
-            moveDirection = new Vector2Int(0, 1);
+            
             GameManager.Instance.SetState(State.ALIVE);
         }
 
@@ -151,7 +157,7 @@ namespace SnakeCoOp.Snake
 
         private void AddSnakeBody()
         {
-            for (int i = 0; i < snakeBodyCount; i++)
+            for (int i = 0; i < snakeBodyList.Count; i++)
             {
                 Vector2 bodyPosition = snakeBodyList[i];
                 GameObject body = Instantiate(snakeBody);
@@ -160,6 +166,12 @@ namespace SnakeCoOp.Snake
                 body.transform.eulerAngles = transform.eulerAngles;
                 Destroy(body, maxMoveTimer);
             }
+        }
+
+        private void SetInput()
+        {
+            gridPosition = new Vector2Int(10, 10);
+            moveDirection = new Vector2Int(0, 1);
         }
         #endregion ------------------
 
@@ -171,8 +183,7 @@ namespace SnakeCoOp.Snake
 
         public void IncreaseSnakeSize()
         {
-            int randomPart = Random.Range(1, 4);
-            snakeBodyCount += randomPart;
+            snakeBodyCount++;
         }
 
         public void DecreaseSnakeSize()
@@ -181,9 +192,7 @@ namespace SnakeCoOp.Snake
             {
                 return;
             }
-
-            int randomPart = Random.Range(1, 4);
-            snakeBodyCount -= randomPart;
+            snakeBodyCount--;
 
             if (snakeBodyCount <= 0)
             {
@@ -196,26 +205,6 @@ namespace SnakeCoOp.Snake
             List<Vector2Int> snakeFullBodyList = new List<Vector2Int>() { gridPosition };
             snakeFullBodyList.AddRange(snakeBodyList);
             return snakeFullBodyList;
-        }
-
-        public IEnumerator ActivateShield()
-        {
-            float maxTime = Random.Range(1, 4);
-            StartCoroutine(gameUI.DisplayPowerupText(PowerupType.SHIELD, maxTime));
-            hasShield = true;
-            yield return new WaitForSeconds(maxTime);
-            hasShield = false;
-            yield return null;
-        }
-
-        public IEnumerator ActivateSpeedBoost()
-        {
-            float maxTime = Random.Range(1, 4);
-            StartCoroutine(gameUI.DisplayPowerupText(PowerupType.SPEED_BOOST, maxTime));
-            maxMoveTimer = 0.1f;
-            yield return new WaitForSeconds(maxTime);
-            maxMoveTimer = 0.3f;
-            yield return null;
         }
         #endregion ------------------
     }

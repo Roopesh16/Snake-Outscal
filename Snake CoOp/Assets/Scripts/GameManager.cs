@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum State
 {
@@ -41,6 +42,11 @@ public class GameManager : MonoBehaviour
     public State GetState()
     {
         return state;
+    }
+
+    public void LoadScene(int index)
+    {
+        SceneManager.LoadScene(index);
     }
     #endregion ------------------
 

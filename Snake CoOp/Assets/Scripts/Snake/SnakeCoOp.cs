@@ -6,7 +6,7 @@ using SnakeCoOp.UI;
 
 namespace SnakeCoOp.Snake
 {
-    public class SnakeController : MonoBehaviour
+    public class SnakeCoOp : MonoBehaviour
     {
 
 

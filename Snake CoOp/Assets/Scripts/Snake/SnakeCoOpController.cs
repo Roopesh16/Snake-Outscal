@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using SnakeCoOp.Grid;
 using UnityEngine;
 using SnakeCoOp.UI;
+using Unity.VisualScripting;
 
 namespace SnakeCoOp.Snake
 {
@@ -37,6 +38,16 @@ namespace SnakeCoOp.Snake
         private void Awake()
         {
             snakeBodyList = new List<Vector2Int>();
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("SnakeP1") || other.CompareTag("SnakeP2"))
+            {
+                gameUICoOp.DisplayGameOver();
+                GameManager.Instance.SetState(State.DEAD);
+            }
+
         }
         private void Start()
         {
@@ -200,7 +211,7 @@ namespace SnakeCoOp.Snake
 
         private void AddSnakeBody()
         {
-            for (int i = 0; i < snakeBodyList.Count; i++)
+            for (int i = 0; i < snakeBodyCount; i++)
             {
                 Vector2 bodyPosition = snakeBodyList[i];
                 GameObject body = Instantiate(snakeBody);

@@ -53,7 +53,6 @@ namespace SnakeCoOp.Food
                         foodTimer -= maxFoodTimer;
                         Destroy(food);
                         SpawnFood();
-                        // powerupController.SpawnPowerup();
                     }
                     else
                     {

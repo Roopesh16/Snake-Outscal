@@ -5,7 +5,7 @@ using SnakeCoOp.UI;
 
 namespace SnakeCoOp.Snake
 {
-    public class SnakeCoOp : MonoBehaviour
+    public class SnakeCoOpController : MonoBehaviour
     {
         private enum PlayerType
         {

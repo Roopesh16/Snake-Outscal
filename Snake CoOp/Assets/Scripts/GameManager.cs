@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public enum State
 {
-    NONE,
+    PAUSE,
     ALIVE,
     DEAD
 }

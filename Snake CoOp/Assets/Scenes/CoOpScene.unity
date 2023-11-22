@@ -173,6 +173,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &230770953
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 230770954}
+  - component: {fileID: 230770955}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &230770954
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230770953}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &230770955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230770953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3e49dbfe238f9e44a4a1441424e0afa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &416438230 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1302793719587656443, guid: c3ae0197df2700b4d862d8fe653262bb, type: 3}
@@ -341,6 +385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 893408114}
   - component: {fileID: 893408113}
+  - component: {fileID: 893408115}
   m_Layer: 6
   m_Name: SnakeP2
   m_TagString: Untagged
@@ -415,6 +460,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &893408115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893408111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98532f0f1c706b14a8925b747393d2b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerType: 1
+  gameUI: {fileID: 0}
+  snakeBody: {fileID: 8856185894149967750, guid: 98e9ca90d50dea84ea003e8f858607ef, type: 3}
+  gridController: {fileID: 1112697102}
 --- !u!1 &1072729661
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,7 +819,7 @@ GameObject:
   - component: {fileID: 1574157567}
   - component: {fileID: 1574157568}
   m_Layer: 0
-  m_Name: GameUI
+  m_Name: GameUICoOp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -788,11 +849,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1574157566}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d348c959240bf1c46a78b3c66936da96, type: 3}
+  m_Script: {fileID: 11500000, guid: e73635ff43f58de438c801db224acc8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1518815976}
-  powerupText: {fileID: 0}
   gameOverScreen: {fileID: 566101882}
   quitButton: {fileID: 5171249}
   pauseButton: {fileID: 2027603648}
@@ -1117,7 +1177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1302793719587656443, guid: c3ae0197df2700b4d862d8fe653262bb, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1302793719587656443, guid: c3ae0197df2700b4d862d8fe653262bb, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1214,7 +1274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1846319118473975767, guid: d3588fdcd643b7047a2faa79e17fc825, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1846319118473975767, guid: d3588fdcd643b7047a2faa79e17fc825, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1307,7 +1367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3082375771915497172, guid: 7b4203810ceef0743b557092876f8114, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3082375771915497172, guid: 7b4203810ceef0743b557092876f8114, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1468,6 +1528,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4229612352645425873}
   - component: {fileID: 4229612352645425872}
+  - component: {fileID: 4229612352645425875}
   m_Layer: 6
   m_Name: SnakeP1
   m_TagString: Untagged
@@ -1475,6 +1536,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4229612352645425875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229612352645425874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98532f0f1c706b14a8925b747393d2b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerType: 0
+  gameUI: {fileID: 0}
+  snakeBody: {fileID: 3647489463875334544, guid: e3752a79c13ebad478671ad151ca4a86, type: 3}
+  gridController: {fileID: 1112697102}
 --- !u!1001 &5061825678408622489
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1492,7 +1569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5061825678276945702, guid: 59957f6653a64a245a646267c2b53eb5, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5061825678276945702, guid: 59957f6653a64a245a646267c2b53eb5, type: 3}
       propertyPath: m_AnchorMax.x

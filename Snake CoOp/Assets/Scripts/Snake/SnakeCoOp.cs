@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using System.Collections;
 using SnakeCoOp.Grid;
 using UnityEngine;
 using SnakeCoOp.UI;
-using UnityEngine.EventSystems;
 
 namespace SnakeCoOp.Snake
 {
@@ -17,7 +15,7 @@ namespace SnakeCoOp.Snake
 
         #region --------- Serialized Variables ---------
         [SerializeField] private PlayerType playerType;
-        [SerializeField] private GameUI gameUI;
+        [SerializeField] private GameUICoOp gameUICoOp;
         [SerializeField] private GameObject snakeBody;
         [SerializeField] private GridController gridController;
         #endregion ------------------
@@ -38,12 +36,11 @@ namespace SnakeCoOp.Snake
         #region --------- Monobehavior Methods ---------
         private void Awake()
         {
-            SetInput();
             snakeBodyList = new List<Vector2Int>();
         }
         private void Start()
         {
-            
+            SetPositionDirection();
             GameManager.Instance.SetState(State.ALIVE);
         }
 
@@ -151,7 +148,7 @@ namespace SnakeCoOp.Snake
 
         private void GameOver()
         {
-            gameUI.DisplayGameOver();
+            gameUICoOp.DisplayGameOver();
             StopAllCoroutines();
         }
 
@@ -168,10 +165,20 @@ namespace SnakeCoOp.Snake
             }
         }
 
-        private void SetInput()
+        private void SetPositionDirection()
         {
-            gridPosition = new Vector2Int(10, 10);
-            moveDirection = new Vector2Int(0, 1);
+            switch (playerType)
+            {
+                case PlayerType.PLAYER_1:
+                    gridPosition = new Vector2Int(0, 10);
+                    moveDirection = new Vector2Int(1, 0);
+                    break;
+                case PlayerType.PLAYER_2:
+                    gridPosition = new Vector2Int(gridController.GetGridWidth() - 1, 10);
+                    moveDirection = new Vector2Int(-1, 0);
+                    break;
+
+            }
         }
         #endregion ------------------
 

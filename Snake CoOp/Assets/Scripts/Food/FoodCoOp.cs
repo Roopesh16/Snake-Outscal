@@ -19,7 +19,7 @@ namespace SnakeCoOp.Food
         [SerializeField] private GridController gridController;
         [SerializeField] private GameObject[] foodPrefabs;
         [SerializeField] private SnakeController snake;
-        [SerializeField] private GameUI gameUI;
+        [SerializeField] private GameUICoOp gameUICoOp;
         #endregion ------------------
 
         #region --------- Private Variables ---------
@@ -61,12 +61,12 @@ namespace SnakeCoOp.Food
                             if (foodType == FoodType.MASS_GAINER)
                             {
                                 snake.IncreaseSnakeSize();
-                                gameUI.IncreaseScore();
+                                gameUICoOp.IncreaseScore();
                             }
                             else
                             {
                                 snake.DecreaseSnakeSize();
-                                gameUI.DecreaseScore();
+                                gameUICoOp.DecreaseScore();
                             }
                             Destroy(food);
                             SpawnFood();

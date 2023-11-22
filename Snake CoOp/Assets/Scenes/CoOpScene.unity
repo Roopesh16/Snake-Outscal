@@ -389,9 +389,11 @@ GameObject:
   - component: {fileID: 893408114}
   - component: {fileID: 893408113}
   - component: {fileID: 893408115}
-  m_Layer: 6
+  - component: {fileID: 893408117}
+  - component: {fileID: 893408116}
+  m_Layer: 9
   m_Name: SnakeP2
-  m_TagString: Untagged
+  m_TagString: SnakeP2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -479,6 +481,53 @@ MonoBehaviour:
   gameUICoOp: {fileID: 1574157568}
   snakeBody: {fileID: 8856185894149967750, guid: 98e9ca90d50dea84ea003e8f858607ef, type: 3}
   gridController: {fileID: 1112697102}
+--- !u!61 &893408116
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893408111}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.001958847, y: -0.047005653}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.4222223, y: 1.4222223}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.8934097, y: 1.0618458}
+  m_EdgeRadius: 0
+--- !u!50 &893408117
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 893408111}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1072729661
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,6 +1409,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2129693580}
     m_Modifications:
+    - target: {fileID: 3082375770576450520, guid: 7b4203810ceef0743b557092876f8114, type: 3}
+      propertyPath: buttonIndex
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3082375771915497172, guid: 7b4203810ceef0743b557092876f8114, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1532,9 +1585,11 @@ GameObject:
   - component: {fileID: 4229612352645425873}
   - component: {fileID: 4229612352645425872}
   - component: {fileID: 4229612352645425875}
-  m_Layer: 6
+  - component: {fileID: 4229612352645425877}
+  - component: {fileID: 4229612352645425876}
+  m_Layer: 8
   m_Name: SnakeP1
-  m_TagString: Untagged
+  m_TagString: SnakeP1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1555,6 +1610,53 @@ MonoBehaviour:
   gameUICoOp: {fileID: 1574157568}
   snakeBody: {fileID: 3647489463875334544, guid: e3752a79c13ebad478671ad151ca4a86, type: 3}
   gridController: {fileID: 1112697102}
+--- !u!61 &4229612352645425876
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229612352645425874}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.000000014901161, y: -0.04308796}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.4222223, y: 1.4222223}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.88949084, y: 1.0696793}
+  m_EdgeRadius: 0
+--- !u!50 &4229612352645425877
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4229612352645425874}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &5061825678408622489
 PrefabInstance:
   m_ObjectHideFlags: 0

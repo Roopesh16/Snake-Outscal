@@ -293,6 +293,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &566101882 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3082375771915497173, guid: 7b4203810ceef0743b557092876f8114, type: 3}
+  m_PrefabInstance: {fileID: 3082375771372988847}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &566101883 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3082375771915497172, guid: 7b4203810ceef0743b557092876f8114, type: 3}
@@ -863,6 +868,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1518815976}
   powerupText: {fileID: 1501677811}
+  gameOverScreen: {fileID: 566101882}
 --- !u!1 &1692234858
 GameObject:
   m_ObjectHideFlags: 0

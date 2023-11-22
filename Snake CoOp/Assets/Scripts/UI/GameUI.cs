@@ -9,6 +9,7 @@ namespace SnakeCoOp.UI
         #region --------- Serialized Variables ---------
         [SerializeField] private TextMeshProUGUI scoreText;
         [SerializeField] private TextMeshProUGUI powerupText;
+        [SerializeField] private GameObject gameOverScreen;
         #endregion ------------------
 
         #region --------- Public Variables ---------
@@ -21,6 +22,7 @@ namespace SnakeCoOp.UI
         private void Awake()
         {
             powerupText.enabled = false;
+            gameOverScreen.SetActive(false);
         }
         #endregion ------------------
         #region --------- Public Methods ---------
@@ -66,6 +68,11 @@ namespace SnakeCoOp.UI
             yield return new WaitForSeconds(time);
             powerupText.enabled = false;
             yield return null;
+        }
+
+        public void DisplayGameOver()
+        {
+            gameOverScreen.SetActive(true);
         }
         #endregion ------------------
         #region --------- Private Methods ---------

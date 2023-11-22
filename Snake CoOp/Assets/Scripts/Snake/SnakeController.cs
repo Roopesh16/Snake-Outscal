@@ -145,7 +145,8 @@ namespace SnakeCoOp.Snake
 
         private void GameOver()
         {
-            print("Game Over");
+            gameUI.DisplayGameOver();
+            StopAllCoroutines();
         }
 
         private void AddSnakeBody()

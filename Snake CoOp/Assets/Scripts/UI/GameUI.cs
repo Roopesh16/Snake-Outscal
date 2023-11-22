@@ -1,6 +1,8 @@
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using Unity.VisualScripting;
 
 namespace SnakeCoOp.UI
 {
@@ -10,6 +12,9 @@ namespace SnakeCoOp.UI
         [SerializeField] private TextMeshProUGUI scoreText;
         [SerializeField] private TextMeshProUGUI powerupText;
         [SerializeField] private GameObject gameOverScreen;
+        [SerializeField] private Button quitButton;
+        [SerializeField] private Button pauseButton;
+        [SerializeField] private Button resumeButton;
         #endregion ------------------
 
         #region --------- Public Variables ---------
@@ -21,6 +26,10 @@ namespace SnakeCoOp.UI
         #region --------- Monobehavior Methods ---------
         private void Awake()
         {
+            quitButton.onClick.AddListener(QuitButton);
+            pauseButton.onClick.AddListener(PauseButton);
+            resumeButton.onClick.AddListener(ResumeButton);
+            resumeButton.gameObject.SetActive(false);
             powerupText.enabled = false;
             gameOverScreen.SetActive(false);
         }
@@ -79,6 +88,26 @@ namespace SnakeCoOp.UI
         private void DisplayText()
         {
             scoreText.text = "SCORE : " + score;
+        }
+
+        private void QuitButton()
+        {
+            Time.timeScale = 1;
+            GameManager.Instance.LoadScene(0);
+        }
+
+        private void PauseButton()
+        {
+            pauseButton.gameObject.SetActive(false);
+            resumeButton.gameObject.SetActive(true);
+            Time.timeScale = 0;
+        }
+
+        private void ResumeButton()
+        {
+            pauseButton.gameObject.SetActive(true);
+            resumeButton.gameObject.SetActive(false);
+            Time.timeScale = 1;
         }
         #endregion ------------------
     }

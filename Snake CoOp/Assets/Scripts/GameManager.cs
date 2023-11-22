@@ -44,16 +44,6 @@ public class GameManager : MonoBehaviour
         return state;
     }
 
-    public void RestartScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void MainMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
-
     public void LoadScene(int index)
     {
         SceneManager.LoadScene(index);

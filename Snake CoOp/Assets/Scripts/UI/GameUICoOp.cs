@@ -7,7 +7,8 @@ namespace SnakeCoOp.UI
     public class GameUICoOp : MonoBehaviour
     {
         #region --------- Serialized Variables ---------
-        [SerializeField] private TextMeshProUGUI scoreText;
+        [SerializeField] private TextMeshProUGUI p1ScoreText;
+        [SerializeField] private TextMeshProUGUI p2ScoreText;
         [SerializeField] private GameObject gameOverScreen;
         [SerializeField] private Button quitButton;
         [SerializeField] private Button pauseButton;
@@ -17,7 +18,8 @@ namespace SnakeCoOp.UI
         #region --------- Public Variables ---------
         #endregion ------------------
         #region --------- Private Variables ---------
-        private int score = 0;
+        private int p1Score = 0;
+        private int p2Score = 0;
         private int foodScore = 10;
         #endregion ------------------
         #region --------- Monobehavior Methods ---------
@@ -31,18 +33,36 @@ namespace SnakeCoOp.UI
         }
         #endregion ------------------
         #region --------- Public Methods ---------
-        public void IncreaseScore()
+        public void IncreaseScore(PlayerType playerType)
         {
-            score += foodScore;
-            DisplayText();
+            if (playerType == PlayerType.PLAYER_1)
+            {
+                p1Score += foodScore;
+                DisplayP1Text();
+            }
+            else
+            {
+                p2Score += foodScore;
+                DisplayP2Text();
+            }
         }
 
-        public void DecreaseScore()
+        public void DecreaseScore(PlayerType playerType)
         {
-            score -= foodScore;
-            if (score <= 0)
-                score = 0;
-            DisplayText();
+            if (playerType == PlayerType.PLAYER_1)
+            {
+                p1Score -= foodScore;
+                if (p1Score <= 0)
+                    p1Score = 0;
+                DisplayP1Text();
+            }
+            else
+            {
+                p2Score -= foodScore;
+                if (p2Score <= 0)
+                    p2Score = 0;
+                DisplayP1Text();
+            }
         }
 
         public void DisplayGameOver()
@@ -51,9 +71,14 @@ namespace SnakeCoOp.UI
         }
         #endregion ------------------
         #region --------- Private Methods ---------
-        private void DisplayText()
+        private void DisplayP1Text()
         {
-            scoreText.text = "SCORE : " + score;
+            p1ScoreText.text = "P1 SCORE : " + p1Score;
+        }
+
+        private void DisplayP2Text()
+        {
+            p2ScoreText.text = "P2 SCORE : " + p2Score;
         }
 
         private void QuitButton()

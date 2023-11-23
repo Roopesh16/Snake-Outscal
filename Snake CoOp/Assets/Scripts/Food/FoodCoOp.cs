@@ -5,7 +5,6 @@ using SnakeCoOp.UI;
 
 namespace SnakeCoOp.Food
 {
-
     public class FoodCoOp : MonoBehaviour
     {
         private enum FoodType
@@ -61,12 +60,12 @@ namespace SnakeCoOp.Food
                             if (foodType == FoodType.MASS_GAINER)
                             {
                                 snakeP1.IncreaseSnakeSize();
-                                gameUICoOp.IncreaseScore();
+                                gameUICoOp.IncreaseScore(PlayerType.PLAYER_1);
                             }
                             else
                             {
                                 snakeP1.DecreaseSnakeSize();
-                                gameUICoOp.DecreaseScore();
+                                gameUICoOp.DecreaseScore(PlayerType.PLAYER_1);
                             }
                             Destroy(food);
                             SpawnFood();
@@ -77,12 +76,12 @@ namespace SnakeCoOp.Food
                             if (foodType == FoodType.MASS_GAINER)
                             {
                                 snakeP2.IncreaseSnakeSize();
-                                gameUICoOp.IncreaseScore();
+                                gameUICoOp.IncreaseScore(PlayerType.PLAYER_2);
                             }
                             else
                             {
                                 snakeP2.DecreaseSnakeSize();
-                                gameUICoOp.DecreaseScore();
+                                gameUICoOp.DecreaseScore(PlayerType.PLAYER_2);
                             }
                             Destroy(food);
                             SpawnFood();

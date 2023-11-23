@@ -2,17 +2,17 @@ using System.Collections.Generic;
 using SnakeCoOp.Grid;
 using UnityEngine;
 using SnakeCoOp.UI;
-using Unity.VisualScripting;
+
+public enum PlayerType
+{
+    PLAYER_1,
+    PLAYER_2
+}
 
 namespace SnakeCoOp.Snake
 {
     public class SnakeCoOpController : MonoBehaviour
     {
-        private enum PlayerType
-        {
-            PLAYER_1,
-            PLAYER_2
-        }
 
         #region --------- Serialized Variables ---------
         [SerializeField] private PlayerType playerType;

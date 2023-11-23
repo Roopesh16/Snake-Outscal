@@ -17,10 +17,10 @@ public enum Audio_BGM
 public class AudioManager : MonoBehaviour
 {
     #region --------- Serialized Variables ---------
-    [SerializeField] private List<AudioClip> audioSfxList;
-    [SerializeField] private List<AudioClip> audioBgmList;
     [SerializeField] private AudioSource audioSfxSource;
     [SerializeField] private AudioSource audioBgmSource;
+    [SerializeField] private List<AudioClip> audioSfxList;
+    [SerializeField] private List<AudioClip> audioBgmList;
     #endregion ------------------
 
     #region --------- Public Variables ---------
@@ -54,6 +54,7 @@ public class AudioManager : MonoBehaviour
         if (audioBgmList[(int)audio_BGM] != null)
         {
             audioBgmSource.clip = audioBgmList[(int)audio_BGM];
+            audioBgmSource.playOnAwake = true;
             audioBgmSource.loop = true;
             audioBgmSource.Play();
         }

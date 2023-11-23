@@ -1,17 +1,22 @@
 using System.Collections.Generic;
-using System.Collections;
 using SnakeCoOp.Grid;
 using UnityEngine;
 using SnakeCoOp.UI;
 
+public enum PlayerType
+{
+    PLAYER_1,
+    PLAYER_2
+}
+
 namespace SnakeCoOp.Snake
 {
-    public class SnakeCoOp : MonoBehaviour
+    public class SnakeCoOpController : MonoBehaviour
     {
 
-
         #region --------- Serialized Variables ---------
-        [SerializeField] private GameUI gameUI;
+        [SerializeField] private PlayerType playerType;
+        [SerializeField] private GameUICoOp gameUICoOp;
         [SerializeField] private GameObject snakeBody;
         [SerializeField] private GridController gridController;
         #endregion ------------------
@@ -34,10 +39,19 @@ namespace SnakeCoOp.Snake
         {
             snakeBodyList = new List<Vector2Int>();
         }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("SnakeP1") || other.CompareTag("SnakeP2"))
+            {
+                gameUICoOp.DisplayGameOver();
+                GameManager.Instance.SetState(State.DEAD);
+            }
+
+        }
         private void Start()
         {
-            gridPosition = new Vector2Int(10, 10);
-            moveDirection = new Vector2Int(0, 1);
+            SetPositionDirection();
             GameManager.Instance.SetState(State.ALIVE);
         }
 
@@ -45,14 +59,21 @@ namespace SnakeCoOp.Snake
         {
             if (GameManager.Instance.GetState() == State.ALIVE)
             {
-                InputHandler();
+                if (playerType == PlayerType.PLAYER_1)
+                {
+                    ArrowInputHandler();
+                }
+                else
+                {
+                    WASDInputHandler();
+                }
                 UpdateSnakePosition();
             }
         }
         #endregion ------------------
 
         #region --------- Private Methods ---------
-        private void InputHandler()
+        private void ArrowInputHandler()
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -82,6 +103,45 @@ namespace SnakeCoOp.Snake
             }
 
             if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                if (moveDirection.x != -1)
+                {
+                    moveDirection.x = 1;
+                    moveDirection.y = 0;
+                }
+            }
+        }
+
+        private void WASDInputHandler()
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                if (moveDirection.y != -1)
+                {
+                    moveDirection.x = 0;
+                    moveDirection.y = 1;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                if (moveDirection.y != 1)
+                {
+                    moveDirection.x = 0;
+                    moveDirection.y = -1;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                if (moveDirection.x != 1)
+                {
+                    moveDirection.x = -1;
+                    moveDirection.y = 0;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.D))
             {
                 if (moveDirection.x != -1)
                 {
@@ -145,7 +205,7 @@ namespace SnakeCoOp.Snake
 
         private void GameOver()
         {
-            gameUI.DisplayGameOver();
+            gameUICoOp.DisplayGameOver();
             StopAllCoroutines();
         }
 
@@ -161,6 +221,20 @@ namespace SnakeCoOp.Snake
                 Destroy(body, maxMoveTimer);
             }
         }
+
+        private void SetPositionDirection()
+        {
+            if (playerType == PlayerType.PLAYER_1)
+            {
+                gridPosition = new Vector2Int(0, 10);
+                moveDirection = new Vector2Int(1, 0);
+            }
+            else
+            {
+                gridPosition = new Vector2Int(gridController.GetGridWidth() - 1, 10);
+                moveDirection = new Vector2Int(-1, 0);
+            }
+        }
         #endregion ------------------
 
         #region --------- Public Methods ---------
@@ -171,8 +245,7 @@ namespace SnakeCoOp.Snake
 
         public void IncreaseSnakeSize()
         {
-            int randomPart = Random.Range(1, 4);
-            snakeBodyCount += randomPart;
+            snakeBodyCount++;
         }
 
         public void DecreaseSnakeSize()
@@ -181,9 +254,7 @@ namespace SnakeCoOp.Snake
             {
                 return;
             }
-
-            int randomPart = Random.Range(1, 4);
-            snakeBodyCount -= randomPart;
+            snakeBodyCount--;
 
             if (snakeBodyCount <= 0)
             {
@@ -196,26 +267,6 @@ namespace SnakeCoOp.Snake
             List<Vector2Int> snakeFullBodyList = new List<Vector2Int>() { gridPosition };
             snakeFullBodyList.AddRange(snakeBodyList);
             return snakeFullBodyList;
-        }
-
-        public IEnumerator ActivateShield()
-        {
-            float maxTime = Random.Range(1, 4);
-            StartCoroutine(gameUI.DisplayPowerupText(PowerupType.SHIELD, maxTime));
-            hasShield = true;
-            yield return new WaitForSeconds(maxTime);
-            hasShield = false;
-            yield return null;
-        }
-
-        public IEnumerator ActivateSpeedBoost()
-        {
-            float maxTime = Random.Range(1, 4);
-            StartCoroutine(gameUI.DisplayPowerupText(PowerupType.SPEED_BOOST, maxTime));
-            maxMoveTimer = 0.1f;
-            yield return new WaitForSeconds(maxTime);
-            maxMoveTimer = 0.3f;
-            yield return null;
         }
         #endregion ------------------
     }

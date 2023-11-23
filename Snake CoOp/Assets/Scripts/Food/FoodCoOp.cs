@@ -2,6 +2,7 @@ using UnityEngine;
 using SnakeCoOp.Snake;
 using SnakeCoOp.Grid;
 using SnakeCoOp.UI;
+using UnityEngine.Audio;
 
 namespace SnakeCoOp.Food
 {
@@ -59,11 +60,13 @@ namespace SnakeCoOp.Food
                             foodTimer -= maxFoodTimer;
                             if (foodType == FoodType.MASS_GAINER)
                             {
+                                AudioManager.Instance.PlaySFX(Audio_SFX.FOOD_EAT);
                                 snakeP1.IncreaseSnakeSize();
                                 gameUICoOp.IncreaseScore(PlayerType.PLAYER_1);
                             }
                             else
                             {
+                                AudioManager.Instance.PlaySFX(Audio_SFX.BURNER_EAT);
                                 snakeP1.DecreaseSnakeSize();
                                 gameUICoOp.DecreaseScore(PlayerType.PLAYER_1);
                             }
@@ -75,11 +78,13 @@ namespace SnakeCoOp.Food
                             foodTimer -= maxFoodTimer;
                             if (foodType == FoodType.MASS_GAINER)
                             {
+                                AudioManager.Instance.PlaySFX(Audio_SFX.FOOD_EAT);
                                 snakeP2.IncreaseSnakeSize();
                                 gameUICoOp.IncreaseScore(PlayerType.PLAYER_2);
                             }
                             else
                             {
+                                AudioManager.Instance.PlaySFX(Audio_SFX.BURNER_EAT);
                                 snakeP2.DecreaseSnakeSize();
                                 gameUICoOp.DecreaseScore(PlayerType.PLAYER_2);
                             }

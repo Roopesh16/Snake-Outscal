@@ -44,8 +44,7 @@ namespace SnakeCoOp.Snake
         {
             if (other.CompareTag("SnakeP1") || other.CompareTag("SnakeP2"))
             {
-                gameUICoOp.DisplayGameOver();
-                GameManager.Instance.SetState(State.DEAD);
+                GameOver();
             }
 
         }
@@ -185,7 +184,6 @@ namespace SnakeCoOp.Snake
             {
                 if (gridPosition == snakeBodyList[i])
                 {
-                    GameManager.Instance.SetState(State.DEAD);
                     GameOver();
                     break;
                 }
@@ -205,6 +203,8 @@ namespace SnakeCoOp.Snake
 
         private void GameOver()
         {
+            GameManager.Instance.SetState(State.DEAD);
+            AudioManager.Instance.PlaySFX(Audio_SFX.GAME_OVER);
             gameUICoOp.DisplayGameOver();
             StopAllCoroutines();
         }

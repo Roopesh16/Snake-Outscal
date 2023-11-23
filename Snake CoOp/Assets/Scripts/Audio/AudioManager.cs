@@ -6,6 +6,7 @@ public enum Audio_SFX
     BUTTON_CLICK,
     FOOD_EAT,
     BURNER_EAT,
+    POWERUP,
     GAME_OVER
 }
 
@@ -39,6 +40,11 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(this);
+    }
+
+    private void Start()
+    {
+        PlayBGM(Audio_BGM.GAMEPLAY);
     }
     #endregion ------------------
 

@@ -92,12 +92,14 @@ namespace SnakeCoOp.UI
 
         private void QuitButton()
         {
+            AudioManager.Instance.PlaySFX(Audio_SFX.BUTTON_CLICK);
             Time.timeScale = 1;
             GameManager.Instance.LoadScene(0);
         }
 
         private void PauseButton()
         {
+            AudioManager.Instance.PlaySFX(Audio_SFX.BUTTON_CLICK);
             pauseButton.gameObject.SetActive(false);
             resumeButton.gameObject.SetActive(true);
             Time.timeScale = 0;
@@ -105,6 +107,7 @@ namespace SnakeCoOp.UI
 
         private void ResumeButton()
         {
+            AudioManager.Instance.PlaySFX(Audio_SFX.BUTTON_CLICK);
             pauseButton.gameObject.SetActive(true);
             resumeButton.gameObject.SetActive(false);
             Time.timeScale = 1;

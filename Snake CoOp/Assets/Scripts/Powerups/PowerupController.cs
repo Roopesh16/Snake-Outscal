@@ -53,6 +53,7 @@ namespace SnakeCoOp.Powerup
                         if (powerUp.transform.position == snake.transform.position)
                         {
                             powerupTimer -= maxPowerupTimer;
+                            AudioManager.Instance.PlaySFX(Audio_SFX.POWERUP);
                             Destroy(powerUp);
                             switch (powerupType)
                             {
@@ -87,14 +88,17 @@ namespace SnakeCoOp.Powerup
 
             powerUp = GetRandomPowerUp();
 
-            do
+            if (powerUp != null)
             {
-                powerUpPosition = new Vector2Int(Random.Range(0, gridController.GetGridWidth()), Random.Range(0, gridController.GetGridHeight()));
-            } while ((snake.GetFullSnakeSize().IndexOf(powerUpPosition) != -1) && powerUpPosition != food.GetFoodPosition());
+                do
+                {
+                    powerUpPosition = new Vector2Int(Random.Range(0, gridController.GetGridWidth()), Random.Range(0, gridController.GetGridHeight()));
+                } while ((snake.GetFullSnakeSize().IndexOf(powerUpPosition) != -1) && powerUpPosition != food.GetFoodPosition());
 
-            powerUp = Instantiate(powerUpPrefabs[powerupIndex]);
-            powerUp.transform.position = new Vector2(powerUpPosition.x, powerUpPosition.y);
-            powerupTimer = 0f;
+                powerUp = Instantiate(powerUpPrefabs[powerupIndex]);
+                powerUp.transform.position = new Vector2(powerUpPosition.x, powerUpPosition.y);
+                powerupTimer = 0f;
+            }
         }
         #endregion ------------------
 

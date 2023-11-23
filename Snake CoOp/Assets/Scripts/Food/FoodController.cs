@@ -61,11 +61,13 @@ namespace SnakeCoOp.Food
                             foodTimer -= maxFoodTimer;
                             if (foodType == FoodType.MASS_GAINER)
                             {
+                                AudioManager.Instance.PlaySFX(Audio_SFX.FOOD_EAT);
                                 snake.IncreaseSnakeSize();
                                 gameUI.IncreaseScore();
                             }
                             else
                             {
+                                AudioManager.Instance.PlaySFX(Audio_SFX.BURNER_EAT);
                                 snake.DecreaseSnakeSize();
                                 gameUI.DecreaseScore();
                             }

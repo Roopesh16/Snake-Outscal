@@ -17,6 +17,7 @@ public class ButtonView : MonoBehaviour
     #region --------- Private Methods ---------
     private void AddScene()
     {
+        AudioManager.Instance.PlaySFX(Audio_SFX.BUTTON_CLICK);
         GameManager.Instance.LoadScene(buttonIndex);
     }
     #endregion ------------------

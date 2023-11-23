@@ -145,6 +145,7 @@ namespace SnakeCoOp.Snake
 
         private void GameOver()
         {
+            AudioManager.Instance.PlaySFX(Audio_SFX.GAME_OVER);
             gameUI.DisplayGameOver();
             StopAllCoroutines();
         }
